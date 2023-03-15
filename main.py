@@ -47,3 +47,4 @@ print(f"Net-ID: {net_id_for_print.rstrip('.')}")
 print(f"Host-ID: {host_id}")
 host_portion = pow(2, (32 - netprefix)) - 2
 print(f"Host_Portion: {host_portion}")
+# todo: Umwandeln von binärer ip-adresse zu dezimalzahl
