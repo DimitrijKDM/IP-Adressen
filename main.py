@@ -10,15 +10,16 @@ ip_address_sectionB = ''.join(format(byte, '08b') for byte in byte_array2)
 ip_address_sectionC = ''.join(format(byte, '08b') for byte in byte_array3)
 ip_address_sectionD = ''.join(format(byte, '08b') for byte in byte_array4)
 
-print(f"IP Address: {ip_address_sectionA}")
-print(f"IP Address: {ip_address_sectionB}")
-print(f"IP Address: {ip_address_sectionC}")
-print(f"IP Address: {ip_address_sectionD}")
+print(f"IP Address Section A: {ip_address_sectionA}")
+print(f"IP Address Section B: {ip_address_sectionB}")
+print(f"IP Address Section C: {ip_address_sectionC}")
+print(f"IP Address Section D: {ip_address_sectionD}")
 
 ip_address_for_print = f"{ip_address_sectionA}.{ip_address_sectionB}.{ip_address_sectionC}.{ip_address_sectionD}"
 ip_address = ip_address_sectionA + ip_address_sectionB + ip_address_sectionC + ip_address_sectionD
 
-print(ip_address_for_print)
+print(f"IP Address Full: {ip_address_for_print}")
+
 # Netprefix query
 while True:
     try:
@@ -46,5 +47,5 @@ elif 0 < int(net_id) == 8:
 print(f"Net-ID: {net_id_for_print.rstrip('.')}")
 print(f"Host-ID: {host_id}")
 host_portion = pow(2, (32 - netprefix)) - 2
-print(f"Host_Portion: {host_portion}")
+print(f"Host_Portion: {host_portion:_}")
 # todo: Umwandeln von binärer ip-adresse zu dezimalzahl
