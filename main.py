@@ -26,16 +26,34 @@ def define_ips():
     ip_address_sectionB = ''.join(format(byte, '08b') for byte in byte_array2)
     ip_address_sectionC = ''.join(format(byte, '08b') for byte in byte_array3)
     ip_address_sectionD = ''.join(format(byte, '08b') for byte in byte_array4)
-    print(f"IP Address Section A: {ip_address_sectionA}")
-    print(f"IP Address Section B: {ip_address_sectionB}")
-    print(f"IP Address Section C: {ip_address_sectionC}")
-    print(f"IP Address Section D: {ip_address_sectionD}")
     ip_address_for_print = f"{ip_address_sectionA}.{ip_address_sectionB}.{ip_address_sectionC}.{ip_address_sectionD}"
     ip_address = ip_address_sectionA + ip_address_sectionB + ip_address_sectionC + ip_address_sectionD
-    print(f"IP Address Full: {ip_address_for_print}")
+    print(f"IP Address: {ip_address_for_print}")
+
+
+def convert_binary_to_decimal():
+    ip_address_decimal_a = 0
+    for digit in ip_address_sectionA:
+        ip_address_decimal_a = ip_address_decimal_a * 2 + int(digit)
+
+    ip_address_decimal_b = 0
+    for digit in ip_address_sectionB:
+        ip_address_decimal_b = ip_address_decimal_b * 2 + int(digit)
+
+    ip_address_decimal_c = 0
+    for digit in ip_address_sectionC:
+        ip_address_decimal_c = ip_address_decimal_c * 2 + int(digit)
+
+    ip_address_decimal_d = 0
+    for digit in ip_address_sectionD:
+        ip_address_decimal_d = ip_address_decimal_d * 2 + int(digit)
+
+    ip_address_decimal = f"{ip_address_decimal_a}.{ip_address_decimal_b}.{ip_address_decimal_c}.{ip_address_decimal_d}"
+    print(f"IPv6: {ip_address_decimal}")
 
 
 define_ips()
+convert_binary_to_decimal()
 
 
 def ask_netprefix():
@@ -79,27 +97,3 @@ def net_id_for_reading(net_id):
 
 
 define_ids()
-
-
-def convert_binary_to_decimal():
-    ip_address_decimal_a = 0
-    for digit in ip_address_sectionA:
-        ip_address_decimal_a = ip_address_decimal_a * 2 + int(digit)
-
-    ip_address_decimal_b = 0
-    for digit in ip_address_sectionB:
-        ip_address_decimal_b = ip_address_decimal_b * 2 + int(digit)
-
-    ip_address_decimal_c = 0
-    for digit in ip_address_sectionC:
-        ip_address_decimal_c = ip_address_decimal_c * 2 + int(digit)
-
-    ip_address_decimal_d = 0
-    for digit in ip_address_sectionD:
-        ip_address_decimal_d = ip_address_decimal_d * 2 + int(digit)
-
-    ip_address_decimal = f"{ip_address_decimal_a}.{ip_address_decimal_b}.{ip_address_decimal_c}.{ip_address_decimal_d}"
-    print(f"IPv6: {ip_address_decimal}")
-
-
-convert_binary_to_decimal()
