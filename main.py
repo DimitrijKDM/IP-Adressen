@@ -10,6 +10,9 @@ global ip_address_sectionD
 global ip_address_decimal
 global net_id
 global net_id_decimal
+global net_id_for_print
+global host_id
+global host_portion
 
 # Define 4 bytes
 byte_array1 = os.urandom(1)
@@ -49,15 +52,16 @@ def ask_netprefix():
 
 def define_ids():
     global net_id
+    global host_id
+    global host_portion
     net_id = (ip_address[:netprefix])
     host_id = (ip_address[netprefix:])
     net_id_for_reading()
-    print(f"Host-ID: {host_id}")
     host_portion = pow(2, (32 - netprefix)) - 2
-    print(f"Host_Portion: {host_portion:_}")
 
 
 def net_id_for_reading():
+    global net_id_for_print
     net_id_for_print = ""
     if int(net_id) > 24:
         net_id_for_print = f"{net_id[:8]}.{net_id[8:16]}.{net_id[16:24]}.{net_id[24:]}"
@@ -67,7 +71,6 @@ def net_id_for_reading():
         net_id_for_print = f"{net_id[:8]}.{net_id[8:]}"
     elif 0 < int(net_id) == 8:
         net_id_for_print = f"{net_id[:]}"
-    print(f"Net-ID: {net_id_for_print.rstrip('.')}")
 
 
 def convert_binary_to_decimal():
@@ -102,7 +105,10 @@ def main():
     define_ids()
     convert_binary_to_decimal()
     print(f"IPv4-Adresse: {ip_address_decimal}")
+    print(f"Net-ID: {net_id_for_print.rstrip('.')}")
     print(f"Net-ID: {net_id_decimal}")
+    print(f"Host-ID: {host_id}")
+    print(f"Host_Portion: {host_portion:_}")
 
 
 if __name__ == '__main__':
