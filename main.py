@@ -1,4 +1,5 @@
 import os
+from textwrap import wrap
 
 # Global variables
 global ip_address
@@ -113,3 +114,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# todo: In Dezimalzahlen umwandeln
