@@ -1,5 +1,4 @@
 import os
-from textwrap import wrap
 
 # Global variables
 global ip_address
