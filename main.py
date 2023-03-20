@@ -66,6 +66,36 @@ def net_id_for_reading():
     net_id_for_print = ""
     if int(net_id) > 24:
         net_id_for_print = f"{net_id[:8]}.{net_id[8:16]}.{net_id[16:24]}.{net_id[24:]}"
+    elif 16 < int(net_id) <= 24:
+        net_id_for_print = f"{net_id[:8]}.{net_id[8:16]}.{net_id[16:]}"
+    elif 16 >= int(net_id) > 8:
+        net_id_for_print = f"{net_id[:8]}.{net_id[8:]}"
+    elif 0 < int(net_id) == 8:
+        net_id_for_print = f"{net_id[:]}"
+
+
+def convert_binary_to_decimal():
+    global ip_address_decimal
+    global net_id_decimal
+    ip_address_decimal_a = 0
+    for digit in ip_address_sectionA:
+        ip_address_decimal_a = ip_address_decimal_a * 2 + int(digit)
+
+    ip_address_decimal_b = 0
+    for digit in ip_address_sectionB:
+        ip_address_decimal_b = ip_address_decimal_b * 2 + int(digit)
+
+    ip_address_decimal_c = 0
+    for digit in ip_address_sectionC:
+        ip_address_decimal_c = ip_address_decimal_c * 2 + int(digit)
+
+    ip_address_decimal_d = 0
+    for digit in ip_address_sectionD:
+        ip_address_decimal_d = ip_address_decimal_d * 2 + int(digit)
+
+    ip_address_decimal = f"{ip_address_decimal_a}.{ip_address_decimal_b}.{ip_address_decimal_c}.{ip_address_decimal_d}"
+
+    if int(net_id) > 24:
         # Split net_id into sections
         net_id1 = net_id[:8]
         net_id2 = net_id[8:2*8]
@@ -86,7 +116,6 @@ def net_id_for_reading():
             net_id_decimal_d = net_id_decimal_d * 2 + int(digit)
         net_id_decimal = f"{net_id_decimal_a}.{net_id_decimal_b}.{net_id_decimal_c}.{net_id_decimal_d}"
     elif 16 < int(net_id) <= 24:
-        net_id_for_print = f"{net_id[:8]}.{net_id[8:16]}.{net_id[16:]}"
         net_id1 = net_id[:8]
         net_id2 = net_id[8:2 * 8]
         net_id3 = net_id[2 * 8:3 * 8]
@@ -101,7 +130,6 @@ def net_id_for_reading():
             net_id_decimal_c = net_id_decimal_c * 2 + int(digit)
         net_id_decimal = f"{net_id_decimal_a}.{net_id_decimal_b}.{net_id_decimal_c}"
     elif 16 >= int(net_id) > 8:
-        net_id_for_print = f"{net_id[:8]}.{net_id[8:]}"
         net_id1 = net_id[:8]
         net_id2 = net_id[8:2 * 8]
         net_id_decimal_a = 0
@@ -112,33 +140,11 @@ def net_id_for_reading():
             net_id_decimal_b = net_id_decimal_b * 2 + int(digit)
         net_id_decimal = f"{net_id_decimal_a}.{net_id_decimal_b}"
     elif 0 < int(net_id) == 8:
-        net_id_for_print = f"{net_id[:]}"
         net_id1 = net_id[:8]
         net_id_decimal_a = 0
         for digit in net_id1:
             net_id_decimal_a = net_id_decimal_a * 2 + int(digit)
         net_id_decimal = f"{net_id_decimal_a}"
-
-
-def convert_binary_to_decimal():
-    global ip_address_decimal
-    ip_address_decimal_a = 0
-    for digit in ip_address_sectionA:
-        ip_address_decimal_a = ip_address_decimal_a * 2 + int(digit)
-
-    ip_address_decimal_b = 0
-    for digit in ip_address_sectionB:
-        ip_address_decimal_b = ip_address_decimal_b * 2 + int(digit)
-
-    ip_address_decimal_c = 0
-    for digit in ip_address_sectionC:
-        ip_address_decimal_c = ip_address_decimal_c * 2 + int(digit)
-
-    ip_address_decimal_d = 0
-    for digit in ip_address_sectionD:
-        ip_address_decimal_d = ip_address_decimal_d * 2 + int(digit)
-
-    ip_address_decimal = f"{ip_address_decimal_a}.{ip_address_decimal_b}.{ip_address_decimal_c}.{ip_address_decimal_d}"
 
 
 def main():
