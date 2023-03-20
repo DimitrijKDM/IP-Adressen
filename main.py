@@ -13,6 +13,7 @@ global net_id_decimal
 global net_id_for_print
 global host_id
 global host_portion
+global host_id_decimal
 
 # Define 4 bytes
 byte_array1 = os.urandom(1)
@@ -62,22 +63,27 @@ def define_ids():
 
 def net_id_for_reading():
     global net_id_for_print
-    global net_id_decimal
     net_id_for_print = ""
-    if int(net_id) > 24:
-        net_id_for_print = f"{net_id[:8]}.{net_id[8:16]}.{net_id[16:24]}.{net_id[24:]}"
-    elif 16 < int(net_id) <= 24:
+
+    if 16 < int(net_id) <= 24:
         net_id_for_print = f"{net_id[:8]}.{net_id[8:16]}.{net_id[16:]}"
     elif 16 >= int(net_id) > 8:
         net_id_for_print = f"{net_id[:8]}.{net_id[8:]}"
-    elif 0 < int(net_id) == 8:
+    elif int(net_id) == 8:
         net_id_for_print = f"{net_id[:]}"
 
 
 def convert_binary_to_decimal():
     global ip_address_decimal
     global net_id_decimal
+    global host_id_decimal
+
+    # Define IP Address Sections
+
     ip_address_decimal_a = 0
+
+    # Convert Sections into Decimals
+
     for digit in ip_address_sectionA:
         ip_address_decimal_a = ip_address_decimal_a * 2 + int(digit)
 
@@ -93,15 +99,20 @@ def convert_binary_to_decimal():
     for digit in ip_address_sectionD:
         ip_address_decimal_d = ip_address_decimal_d * 2 + int(digit)
 
+    # Define Decimal IP Address (Put all Sections into one)
+
     ip_address_decimal = f"{ip_address_decimal_a}.{ip_address_decimal_b}.{ip_address_decimal_c}.{ip_address_decimal_d}"
 
-    if int(net_id) > 24:
-        # Split net_id into sections
+    if 16 < int(net_id) <= 24:
+
+        # Define Net-ID Sections
+
         net_id1 = net_id[:8]
-        net_id2 = net_id[8:2*8]
-        net_id3 = net_id[2*8:3*8]
-        net_id4 = net_id[3*8:]
-        # Make net_id decimal
+        net_id2 = net_id[8:16]
+        net_id3 = net_id[16:24]
+
+        # Convert Net-ID Sections into Decimal
+
         net_id_decimal_a = 0
         for digit in net_id1:
             net_id_decimal_a = net_id_decimal_a * 2 + int(digit)
@@ -111,27 +122,28 @@ def convert_binary_to_decimal():
         net_id_decimal_c = 0
         for digit in net_id3:
             net_id_decimal_c = net_id_decimal_c * 2 + int(digit)
-        net_id_decimal_d = 0
-        for digit in net_id4:
-            net_id_decimal_d = net_id_decimal_d * 2 + int(digit)
-        net_id_decimal = f"{net_id_decimal_a}.{net_id_decimal_b}.{net_id_decimal_c}.{net_id_decimal_d}"
-    elif 16 < int(net_id) <= 24:
-        net_id1 = net_id[:8]
-        net_id2 = net_id[8:2 * 8]
-        net_id3 = net_id[2 * 8:3 * 8]
-        net_id_decimal_a = 0
-        for digit in net_id1:
-            net_id_decimal_a = net_id_decimal_a * 2 + int(digit)
-        net_id_decimal_b = 0
-        for digit in net_id2:
-            net_id_decimal_b = net_id_decimal_b * 2 + int(digit)
-        net_id_decimal_c = 0
-        for digit in net_id3:
-            net_id_decimal_c = net_id_decimal_c * 2 + int(digit)
+
+        # Define Net-ID Decimal (Put Sections into one)
+
         net_id_decimal = f"{net_id_decimal_a}.{net_id_decimal_b}.{net_id_decimal_c}"
+
+        # Define Host-ID Sections
+
+        host_id1 = net_id[24:]
+
+        # Convert Host-ID Sections into Decimal
+
+        host_id_decimal_a = 0
+        for digit in host_id1:
+            host_id_decimal_a = host_id_decimal_a * 2 + int(digit)
+
+        # Put Sections into one
+
+        host_id_decimal = f"{host_id_decimal_a}"
+
     elif 16 >= int(net_id) > 8:
         net_id1 = net_id[:8]
-        net_id2 = net_id[8:2 * 8]
+        net_id2 = net_id[8:16]
         net_id_decimal_a = 0
         for digit in net_id1:
             net_id_decimal_a = net_id_decimal_a * 2 + int(digit)
@@ -139,12 +151,35 @@ def convert_binary_to_decimal():
         for digit in net_id2:
             net_id_decimal_b = net_id_decimal_b * 2 + int(digit)
         net_id_decimal = f"{net_id_decimal_a}.{net_id_decimal_b}"
-    elif 0 < int(net_id) == 8:
+        host_id1 = net_id[24:]
+        host_id2 = net_id[16:24]
+        host_id_decimal_a = 0
+        for digit in host_id1:
+            host_id_decimal_a = host_id_decimal_a * 2 + int(digit)
+        host_id_decimal_b = 0
+        for digit in host_id2:
+            host_id_decimal_b = host_id_decimal_b * 2 + int(digit)
+        host_id_decimal = f"{host_id_decimal_a}.{host_id_decimal_b}"
+
+    elif int(net_id) == 8:
         net_id1 = net_id[:8]
         net_id_decimal_a = 0
         for digit in net_id1:
             net_id_decimal_a = net_id_decimal_a * 2 + int(digit)
         net_id_decimal = f"{net_id_decimal_a}"
+        host_id1 = net_id[24:]
+        host_id2 = net_id[16:24]
+        host_id3 = net_id[8:16]
+        host_id_decimal_a = 0
+        for digit in host_id1:
+            host_id_decimal_a = host_id_decimal_a * 2 + int(digit)
+        host_id_decimal_b = 0
+        for digit in host_id2:
+            host_id_decimal_b = host_id_decimal_b * 2 + int(digit)
+        host_id_decimal_c = 0
+        for digit in host_id3:
+            host_id_decimal_c = host_id_decimal_c * 2 + int(digit)
+        host_id_decimal = f"{host_id_decimal_a}.{host_id_decimal_b}.{host_id_decimal_c}"
 
 
 def main():
@@ -153,9 +188,11 @@ def main():
     define_ids()
     convert_binary_to_decimal()
     print(f"IPv4-Adresse: {ip_address_decimal}")
-    print(f"Net-ID: {net_id_decimal.rstrip('.')}")
+    print(f"Net-ID: {net_id_for_print.rstrip('.')}")
     print(f"Host-ID: {host_id}")
     print(f"Host_Portion: {host_portion:_}")
+    print(f"Net-ID: {net_id_decimal.rstrip('.')}")
+    print(f"Host-ID: {host_id_decimal.rstrip('.')}")
 
 
 if __name__ == '__main__':
