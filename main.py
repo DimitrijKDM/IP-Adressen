@@ -147,7 +147,6 @@ def main():
     define_ids()
     convert_binary_to_decimal()
     print(f"IPv4-Adresse: {ip_address_decimal}")
-    print(f"Net-ID: {net_id_for_print.rstrip('.')}")
     print(f"Net-ID: {net_id_decimal.rstrip('.')}")
     print(f"Host-ID: {host_id}")
     print(f"Host_Portion: {host_portion:_}")
