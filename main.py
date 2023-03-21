@@ -30,8 +30,10 @@ def ask_netprefix():
     while True:
         try:
             netprefix = int(input("Netprefix\n> "))
-            if netprefix != 24 or netprefix != 8 or netprefix != 16:
-                print("Only the numbers 8, 16 or 24!")
+            if netprefix > 24:
+                print("Only numbers from 8-24!")
+            elif netprefix < 8:
+                print("Only numbers from 8-24!")
             else:
                 break
         except ValueError:
