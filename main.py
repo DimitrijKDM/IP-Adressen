@@ -146,4 +146,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-# todo: In Dezimalzahlen umwandeln
+# todo: fix the Display of Net- Host-ID
