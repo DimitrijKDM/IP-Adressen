@@ -72,7 +72,7 @@ def net_id_for_reading(netprefix, net_id):
     return net_id_for_print
 
 
-def convert_binary_net_id_decimal_16_24(net_id):
+def convert_net_id_to_decimal_16_24(net_id):
     # Define Net-ID Sections
 
     net_id1 = net_id[:8]
@@ -103,22 +103,22 @@ def convert_binary_to_decimal(netprefix, ip_ids):
     host_id_decimal = 0
 
     if 16 < netprefix <= 24:
-        net_id_decimal = convert_binary_net_id_decimal_16_24(ip_ids.net_id)
-        host_id_decimal = convert_binary_to_decimal_host_id_16_24(ip_ids)
+        net_id_decimal = convert_net_id_to_decimal_16_24(ip_ids.net_id)
+        host_id_decimal = convert_host_id_to_decimal_16_24(ip_ids)
 
     elif 16 >= netprefix > 8:
         net_id_decimal = convert_net_id_to_decimal_16_8(ip_ids)
-        host_id_decimal = convert_binary_host_id_decimal_16_8(ip_ids)
+        host_id_decimal = convert_host_id_to_decimal_16_8(ip_ids)
 
     elif netprefix == 8:
-        net_id_decimal = convert_binary_to_decimal_net_id_8(ip_ids)
-        host_id_decimal = convert_binary_to_decimal_host_id_8(ip_ids)
+        net_id_decimal = convert_net_id_to_decimal_8(ip_ids)
+        host_id_decimal = convert_host_id_to_decimal_8(ip_ids)
     ip_ids.host_id_decimal = host_id_decimal
     ip_ids.net_id_decimal = net_id_decimal
     return ip_ids
 
 
-def convert_binary_to_decimal_host_id_8(ip_ids):
+def convert_host_id_to_decimal_8(ip_ids):
     host_id1 = ip_ids.net_id[24:]
     host_id2 = ip_ids.net_id[16:24]
     host_id3 = ip_ids.net_id[8:16]
@@ -135,7 +135,7 @@ def convert_binary_to_decimal_host_id_8(ip_ids):
     return host_id_decimal
 
 
-def convert_binary_to_decimal_net_id_8(ip_ids):
+def convert_net_id_to_decimal_8(ip_ids):
     net_id1 = ip_ids.net_id[:8]
     net_id_decimal_a = 0
     for digit in net_id1:
@@ -144,7 +144,7 @@ def convert_binary_to_decimal_net_id_8(ip_ids):
     return net_id_decimal
 
 
-def convert_binary_host_id_decimal_16_8(ip_ids):
+def convert_host_id_to_decimal_16_8(ip_ids):
     host_id1 = ip_ids.net_id[24:]
     host_id2 = ip_ids.net_id[16:24]
     host_id_decimal_a = 0
@@ -157,7 +157,7 @@ def convert_binary_host_id_decimal_16_8(ip_ids):
     return host_id_decimal
 
 
-def convert_binary_to_decimal_host_id_16_24(ip_ids):
+def convert_host_id_to_decimal_16_24(ip_ids):
     # Define Host-ID Sections
     host_id1 = ip_ids.net_id[24:]
     # Convert Host-ID Sections into Decimal
