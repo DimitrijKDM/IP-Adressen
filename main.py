@@ -207,11 +207,9 @@ def main():
     ip_ids = define_ids(netprefix, ip_address)
     ip_ids = convert_binary_to_decimal(netprefix, ip_ids)
     print(f"IPv4-Adresse: {convert_ip_address_to_decimal(ip_address)}")
-    print(f"Net-ID: {ip_ids.net_id_readable.rstrip('.')}")
-    print(f"Host-ID: {ip_ids.host_id}")
-    print(f"Host_Portion: {ip_ids.host_portion:_}")
     print(f"Net-ID: {ip_ids.net_id_decimal.rstrip('.')}")
     print(f"Host-ID: {ip_ids.host_id_decimal.rstrip('.')}")
+    print(f"Host_Portion: {ip_ids.host_portion:_}")
 
 
 if __name__ == '__main__':
