@@ -11,6 +11,17 @@ class IPAddress:
         self.ip_address_sectionA = ip_address_section_a
 
 
+class IPAddressDecimal:
+    def __init__(self, whole_ip_address_decimal, ip_address_decimal_a, ip_address_decimal_b, ip_address_decimal_c,
+                 ip_address_decimal_d, ip_address_decimal_readable):
+        self.ip_address_decimal_readable = ip_address_decimal_readable
+        self.ip_address_decimal_d = ip_address_decimal_d
+        self.ip_address_decimal_c = ip_address_decimal_c
+        self.ip_address_decimal_b = ip_address_decimal_b
+        self.ip_address_decimal_a = ip_address_decimal_a
+        self.whole_ip_address_decimal = whole_ip_address_decimal
+
+
 def define_ips():
     byte_array1 = os.urandom(1)
     byte_array2 = os.urandom(1)
@@ -197,7 +208,11 @@ def convert_ip_address_to_decimal(ip_address):
     for digit in ip_address.ip_address_sectionD:
         ip_address_decimal_d = ip_address_decimal_d * 2 + int(digit)
     # Define Decimal IP Address (Put all Sections into one)
-    ip_address_decimal = f"{ip_address_decimal_a}.{ip_address_decimal_b}.{ip_address_decimal_c}.{ip_address_decimal_d}"
+    ip_address_decimal_readable = f"{ip_address_decimal_a}.{ip_address_decimal_b}.{ip_address_decimal_c}." \
+                                  f"{ip_address_decimal_d}"
+    whole_ip_address_decimal = ip_address_decimal_a + ip_address_decimal_b + ip_address_decimal_c + ip_address_decimal_d
+    ip_address_decimal = IPAddressDecimal(whole_ip_address_decimal, ip_address_decimal_a, ip_address_decimal_b,
+                                          ip_address_decimal_c, ip_address_decimal_d, ip_address_decimal_readable)
     return ip_address_decimal
 
 
@@ -206,10 +221,21 @@ def main():
     netprefix = ask_netprefix()
     ip_ids = define_ids(netprefix, ip_address)
     ip_ids = convert_binary_to_decimal(netprefix, ip_ids)
-    print(f"IPv4-Adresse: {convert_ip_address_to_decimal(ip_address)}")
+    ip_address_decimal = convert_ip_address_to_decimal(ip_address)
+    ip_address_sections_always_eight_digits(ip_address_decimal)
+    print(f"IPv4-Adresse: {ip_address_decimal.ip_address_decimal_readable}")
     print(f"Net-ID: {ip_ids.net_id_decimal.rstrip('.')}")
     print(f"Host-ID: {ip_ids.host_id_decimal.rstrip('.')}")
     print(f"Host_Portion: {ip_ids.host_portion:_}")
+
+
+def ip_address_sections_always_eight_digits(ip_address_decimal):
+    ip_address_decimal_a_8d = str(ip_address_decimal.ip_address_decimal_a).zfill(8)
+    ip_address_decimal_b_8d = str(ip_address_decimal.ip_address_decimal_b).zfill(8)
+    ip_address_decimal_c_8d = str(ip_address_decimal.ip_address_decimal_c).zfill(8)
+    ip_address_decimal_d_8d = str(ip_address_decimal.ip_address_decimal_d).zfill(8)
+    ip_address_decimal_32 = ip_address_decimal_a_8d + ip_address_decimal_b_8d + ip_address_decimal_c_8d + ip_address_decimal_d_8d
+    return ip_address_decimal_32
 
 
 if __name__ == '__main__':
