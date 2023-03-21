@@ -2,13 +2,13 @@ import os
 
 
 class IPAddress:
-    def __init__(self, ip_address_sectionA, ip_address_sectionB, ip_address_sectionC, ip_address_sectionD,
+    def __init__(self, ip_address_section_a, ip_address_section_b, ip_address_section_c, ip_address_section_d,
                  whole_ip_address):
         self.whole_ip_address = whole_ip_address
-        self.ip_address_sectionD = ip_address_sectionD
-        self.ip_address_sectionC = ip_address_sectionC
-        self.ip_address_sectionB = ip_address_sectionB
-        self.ip_address_sectionA = ip_address_sectionA
+        self.ip_address_sectionD = ip_address_section_d
+        self.ip_address_sectionC = ip_address_section_c
+        self.ip_address_sectionB = ip_address_section_b
+        self.ip_address_sectionA = ip_address_section_a
 
 
 def define_ips():
@@ -30,10 +30,8 @@ def ask_netprefix():
     while True:
         try:
             netprefix = int(input("Netprefix\n> "))
-            if netprefix > 24:
-                print("Only numbers from 8-24!")
-            elif netprefix < 8:
-                print("Only numbers from 8-24!")
+            if netprefix != 24 or netprefix != 8 or netprefix != 16:
+                print("Only the numbers 8, 16 or 24!")
             else:
                 break
         except ValueError:
