@@ -84,11 +84,11 @@ def define_ids(netprefix, ip_address):
 
 
 def convert_binary_to_decimal(ip_address_decimal_32, netprefix):
-    print(ip_address_decimal_32.whole_ip_address_decimal_32)
-    net_id_decimal = ip_address_decimal_32.whole_ip_address_decimal_32[:netprefix]
+
+    net_id_decimal = ip_address_decimal_32.ip_address_decimal_a_8d[netprefix:]
     net_id_decimal = net_id_decimal.replace("0", "")
 
-    host_id_decimal = ip_address_decimal_32.whole_ip_address_decimal_32[netprefix:]
+    host_id_decimal = ip_address_decimal_32.ip_address_decimal_a_8d[:netprefix]
     host_id_decimal = host_id_decimal.replace("0", "")
     ip_ids_decimals = IPIDeeznutsDecimal(net_id_decimal, host_id_decimal)
     return ip_ids_decimals
@@ -138,8 +138,8 @@ def main():
     ip_address_decimal_32 = ip_address_sections_always_eight_digits(ip_address_decimal)
     ip_ids_decimals = convert_binary_to_decimal(ip_address_decimal_32, netprefix)
     print(f"IPv4: {ip_address_decimal.ip_address_decimal_readable}")
-    print(f"Net-ID: {ip_ids_decimals.net_id_decimal}")
-    print(f"Host-ID: {ip_ids_decimals.host_id_decimal}")
+    print(f"Net-ID: {ip_ids_decimals.net_id_decimal.rstrip('.')}")
+    print(f"Host-ID: {ip_ids_decimals.host_id_decimal.rstrip('.')}")
     print(f"Host Portion: {ip_ids.host_portion}")
 
 
