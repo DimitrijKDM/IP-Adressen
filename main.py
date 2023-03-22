@@ -87,10 +87,10 @@ def ask_netprefix():
     while True:
         try:
             netprefix = int(input("Netprefix\n> "))
-            if netprefix > 31:
-                print("Only numbers from 1-31!")
-            elif netprefix < 1:
-                print("Only numbers from 1-31!")
+            if netprefix > 30:
+                print("Only numbers from 8-30!")
+            elif netprefix < 8:
+                print("Only numbers from 8-30!")
             else:
                 break
         except ValueError:
