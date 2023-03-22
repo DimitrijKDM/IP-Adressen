@@ -195,14 +195,14 @@ def main():
     ip_ids_decimals = convert_binary_to_decimal(ip_address_decimal_32, netprefix)
     subnetmasc = create_subnetmasc(netprefix)
     subnetmasc_decimal = convert_subnetmasc_to_decimal(subnetmasc)
-    print(f"IPv4: {ip_address_decimal.ip_address_decimal_readable}")
-    print(f"Net-ID: {ip_ids_decimals.net_id_decimal.rstrip('.')}")
-    print(f"Host-ID: {ip_ids_decimals.host_id_decimal.rstrip('.')}")
-    print(f"Host Portion: {ip_ids.host_portion}")
-    print(f"Subnetmasc: {subnetmasc_decimal.subnetmasc_decimal_readable}")
+    print(f"IPv4:           {ip_address_decimal.ip_address_decimal_readable}")
+    print(f"Net-ID:         {ip_ids_decimals.net_id_decimal.rstrip('.')}")
+    print(f"Host-ID:        {ip_ids_decimals.host_id_decimal.rstrip('.')}")
+    print(f"Host Portion:   {ip_ids.host_portion}")
+    print(f"Subnetzmaske:   {subnetmasc_decimal.subnetmasc_decimal_readable}")
 
 
 if __name__ == '__main__':
     main()
 
-# todo: Add Subnetmasc
+# todo: Add DNS-Suffix name and display it
