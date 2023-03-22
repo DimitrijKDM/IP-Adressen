@@ -124,7 +124,6 @@ def ip_address_sections_always_eight_digits(ip_address_decimal):
     ip_address_decimal_d_8d = str(ip_address_decimal.ip_address_decimal_d).zfill(8)
     whole_ip_address_decimal_32 = f"{ip_address_decimal_a_8d}.{ip_address_decimal_b_8d}.{ip_address_decimal_c_8d}." \
                                   f"{ip_address_decimal_d_8d}"
-
     ip_address_decimal_32 = IPAddress32(whole_ip_address_decimal_32, ip_address_decimal_b_8d, ip_address_decimal_c_8d,
                                         ip_address_decimal_d_8d, ip_address_decimal_a_8d)
     return ip_address_decimal_32
@@ -146,4 +145,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-# todo: fix the Display of Net- Host-ID
+# todo: Add Subnetmasc
