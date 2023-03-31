@@ -186,6 +186,11 @@ def convert_subnetmasc_to_decimal(subnetmasc):
     return subnetmasc_decimal
 
 
+def ask_dns_suffix():
+    dns_suffix = input("DNS-Suffix?\n> ")
+    return dns_suffix
+
+
 def main():
     ip_address = define_ips()
     netprefix = ask_netprefix()
@@ -195,6 +200,8 @@ def main():
     ip_ids_decimals = convert_binary_to_decimal(ip_address_decimal_32, netprefix)
     subnetmasc = create_subnetmasc(netprefix)
     subnetmasc_decimal = convert_subnetmasc_to_decimal(subnetmasc)
+    dns_suffix = ask_dns_suffix()
+    print(f"DNS-Suffix:     {dns_suffix}")
     print(f"IPv4:           {ip_address_decimal.ip_address_decimal_readable}")
     print(f"Net-ID:         {ip_ids_decimals.net_id_decimal.rstrip('.')}")
     print(f"Host-ID:        {ip_ids_decimals.host_id_decimal.rstrip('.')}")
