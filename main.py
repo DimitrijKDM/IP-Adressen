@@ -191,7 +191,24 @@ def ask_dns_suffix():
     return dns_suffix
 
 
+def start_display():
+    while True:
+        command = input("> ")
+        if command == "ipconfig":
+            break
+        elif command == "help":
+            print("""
+ipconfig - displays your IP information
+quit - ends program
+            """)
+        elif command == "quit":
+            quit()
+        else:
+            pass
+
+
 def main():
+    start_display()
     ip_address = define_ips()
     netprefix = ask_netprefix()
     ip_ids = define_ids(netprefix, ip_address)
@@ -211,5 +228,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# todo: Add DNS-Suffix name and display it
